@@ -64,7 +64,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
 .scroll-hint{position:absolute;right:32px;bottom:120px;z-index:2;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);writing-mode:vertical-rl}
 @media(max-width:900px){
   .hero{flex-direction:column;align-items:stretch}
-  .hero .wrap{grid-template-columns:1fr;padding-top:330px;padding-bottom:40px}
+  .hero .wrap{grid-template-columns:1fr;padding-top:110px;padding-bottom:40px}
   .hero-stats{position:relative}
   .hero-stats .wrap{grid-template-columns:repeat(2,1fr);row-gap:16px}
   .hs:nth-child(3){border-left:0;padding-left:0}
@@ -193,6 +193,43 @@ form.lead input:focus,form.lead select:focus{outline:2px solid var(--green);bord
 .b2b-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:900px){.biz.feature{grid-template-columns:1fr}.biz.feature img{min-height:220px}.story-sticky{position:relative;top:0}.hero-photo{background-size:auto 60%;background-position:right top}}
 
+/* hero split */
+.hero{background:radial-gradient(900px 600px at 80% 30%,#1f4a2c 0%,var(--deep) 60%,#07170e 100%)}
+.hero .wrap{align-items:center}
+.hero-visual{position:relative;justify-self:end;width:min(460px,100%)}
+.hero-img{border-radius:32px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);transform:rotate(1.5deg)}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
+.chip{position:absolute;background:#fff;color:var(--ink);border-radius:18px;padding:14px 18px;box-shadow:0 20px 40px -15px rgba(0,0,0,.5);display:grid;gap:2px;animation:float 6s ease-in-out infinite}
+.chip b{font-family:Fraunces,serif;font-size:26px;line-height:1;color:var(--green)}
+.chip span{font-size:12.5px;color:var(--muted);max-width:150px}
+.chip-a{left:-40px;top:14%}
+.chip-b{right:-24px;bottom:12%;animation-delay:-3s}
+.chip-b b{color:var(--orange)}
+@keyframes float{50%{transform:translateY(-10px)}}
+/* estrutura */
+.estrutura{background:var(--deep);color:#fff;padding-top:40px}
+.estrutura .sec-head p{color:rgba(255,255,255,.7)}
+.est-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+.est-img{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/4.6}
+.est-bg{position:absolute;inset:0;background-size:auto 160%;background-position:right center;background-repeat:no-repeat}
+.est-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:50px 22px 18px;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.steps{list-style:none;display:grid;gap:4px}
+.steps li{display:flex;gap:20px;padding:20px 0;border-top:1px solid rgba(255,255,255,.12)}
+.steps span{font-family:Fraunces,serif;font-size:28px;color:var(--orange-2);line-height:1;min-width:44px}
+.steps h3{font-size:21px;font-weight:600;margin-bottom:6px}
+.steps p{color:rgba(255,255,255,.7);line-height:1.6;font-size:15px}
+.esg-ic{width:56px;height:56px;border-radius:16px;background:rgba(61,154,58,.12);color:var(--green);display:grid;place-items:center;margin-bottom:20px}
+.esg-ic svg{width:28px;height:28px}
+@media(max-width:900px){
+  .hero .wrap{padding-top:110px}
+  .hero-visual{justify-self:center;width:min(340px,86%);margin-top:10px}
+  .chip-a{left:-22px}.chip-b{right:-18px}
+  .est-grid{grid-template-columns:1fr;gap:40px}
+  .est-img{aspect-ratio:4/3.4}
+  .est-bg{background-size:auto 220%}
+}
+@media (prefers-reduced-motion:reduce){.chip{animation:none}}
+
 /* footer */
 footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-size:14px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
@@ -214,15 +251,14 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
       <div><small>GRUPO</small><span>moriz</span></div>
     </a>
     <div class="navlinks">
-      <a href="#historia">História</a><a href="#numeros">Números</a><a href="#complexo">Complexo 3D</a><a href="#negocios">Negócios</a><a href="#esg">Sustentabilidade</a>
+      <a href="#historia">História</a><a href="#numeros">Números</a><a href="#estrutura">Estrutura</a><a href="#negocios">Negócios</a><a href="#esg">Sustentabilidade</a>
     </div>
     <a href="#parceiros" class="btn btn-primary nav-cta">Seja um revendedor</a>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <div class="hero-photo"></div>
-  <canvas id="egg"></canvas>
+  
   <div class="wrap">
     <div>
       <div class="badge39 reveal"><b>39 anos</b> Valença do Piauí · desde 1987</div>
@@ -233,9 +269,13 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
         <a href="#historia" class="btn btn-ghost">Conheça nossa história</a>
       </div>
     </div>
-    <div></div>
+    <div class="hero-visual reveal">
+      <figure class="hero-img"><img src="https://www.grupomoriz.com.br/imagemfamiliasobrenos.jpeg" alt="Carlos José Moreira com a nova geração da família Moreira" fetchpriority="high"></figure>
+      <div class="chip chip-a"><b>1987</b><span>fundada em Valença do Piauí</span></div>
+      <div class="chip chip-b"><b>Nº 1</b><span>em produção de ovos no Piauí</span></div>
+    </div>
   </div>
-  <div class="scroll-hint">role para explorar</div>
+  
   <div class="hero-stats">
     <div class="wrap">
       <div class="hs"><b>+10 mi</b><span>ovos produzidos por mês</span></div>
@@ -253,7 +293,7 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
       <h2>Uma aposta ousada que virou referência no agro piauiense.</h2>
     </div>
     <div class="story-grid">
-      <div class="story-sticky reveal"><figure class="story-photo"><img src="https://www.grupomoriz.com.br/imagemfamiliasobrenos.jpeg" alt="Carlos José Moreira com a nova geração da família" loading="lazy"><figcaption>Carlos José Moreira (ao centro) com a nova geração da família</figcaption></figure>
+      <div class="story-sticky reveal"><figure class="story-photo" style="aspect-ratio:4/5.2"><img src="https://www.grupomoriz.com.br/background_2.png" alt="Carlos José Moreira, fundador" loading="lazy" style="object-position:0% center"><figcaption>Carlos José Moreira, fundador do Grupo Moriz</figcaption></figure>
       <div class="quote">
         <div class="big">“Vendi o único bem que eu tinha, um Chevette branco, para comprar uma pequena granja em Valença. Era tudo ou nada.”</div>
         <div class="who"><b>Carlos José Marreiros Moreira</b>Fundador do Grupo Moriz</div>
@@ -285,23 +325,21 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
   </div>
 </section>
 
-<section class="farm" id="complexo">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow" style="color:var(--green-2)">Tour 3D</div>
-      <h2>Explore o complexo de Valença.</h2>
-      <p style="color:rgba(255,255,255,.7)">Arraste para girar. Toque nas áreas para conhecer cada etapa da cadeia produtiva.</p>
-    </div>
-    <div class="farm-stage reveal">
-      <canvas id="farm"></canvas>
-      <div class="farm-card"><div class="eyebrow" id="fc-eyebrow" style="color:var(--orange-2)">Visão geral</div><h3 id="fc-title">Uma cadeia integrada</h3><p id="fc-text">Ração própria, aviários climatizados, classificação de ovos e energia solar: tudo no mesmo território, com controle de ponta a ponta.</p></div>
-      <div class="farm-tabs">
-        <button class="on" data-v="0">Visão geral</button>
-        <button data-v="1">Aviários</button>
-        <button data-v="2">Energia solar</button>
-        <button data-v="3">Fábrica de ração</button>
+<section class="estrutura" id="estrutura">
+  <div class="wrap est-grid">
+    <figure class="est-img reveal"><div class="est-bg" role="img" aria-label="Vista aérea dos aviários do Grupo Moriz em Valença do Piauí" style="background-image:url('https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/site/home.hero.s1.desktop/1790787444319-HA_%2038%20ANOS%20MULTIPLICANDO%20O%20BEM_.png')"></div><figcaption>Aviários do Grupo Moriz em Valença do Piauí</figcaption></figure>
+    <div>
+      <div class="sec-head reveal" style="margin-bottom:34px">
+        <div class="eyebrow" style="color:var(--green-2)">Nossa estrutura</div>
+        <h2>Tudo produzido aqui, do grão ao ovo.</h2>
+        <p>Uma cadeia integrada no sertão piauiense, com controle de ponta a ponta.</p>
       </div>
-      <div class="drag-hint">↻ arraste para girar</div>
+      <ol class="steps">
+        <li class="reveal"><span>01</span><div><h3>Fábrica de ração própria</h3><p>Na Chapada dos Correios, garantindo nutrição balanceada e custo sob controle.</p></div></li>
+        <li class="reveal"><span>02</span><div><h3>Aviários automatizados</h3><p>Dezenas de galpões com ventilação, cortinas e manejo diário de equipe treinada.</p></div></li>
+        <li class="reveal"><span>03</span><div><h3>Classificação e embalagem</h3><p>Seleção rigorosa de cada ovo antes de virar Karilan.</p></div></li>
+        <li class="reveal"><span>04</span><div><h3>Distribuição no Nordeste</h3><p>Entrega rápida para supermercados, atacados e food service.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -330,8 +368,8 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
       <h2>Produzir bem é cuidar da terra, das aves e das pessoas.</h2>
     </div>
     <div class="esg-grid">
-      <div class="esg-card reveal"><div class="esg-photo"><img src="https://www.grupomoriz.com.br/sustentabilidadeimage.png" alt="Usina de placas solares" loading="lazy"></div><div class="k">3.500+</div><h3>Energia limpa</h3><p>Placas solares em granjas e unidades, e projetos que transformam resíduos em energia.</p><ul><li>Gestão responsável de resíduos</li><li>Uso eficiente de água e recursos</li></ul></div>
-      <div class="esg-card reveal"><div class="esg-photo"><img src="https://www.grupomoriz.com.br/bemestaranimal.png" alt="Cuidado com as aves" loading="lazy"></div><div class="k">100%</div><h3>Bem-estar animal</h3><p>Ambientes controlados e higienizados, nutrição balanceada e equipe treinada em manejo responsável.</p><ul><li>Protocolos sanitários rigorosos</li><li>Rastreabilidade por lote</li></ul></div>
+      <div class="esg-card reveal"><div class="esg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div class="k">3.500+</div><h3>Energia limpa</h3><p>Placas solares em granjas e unidades, e projetos que transformam resíduos em energia.</p><ul><li>Gestão responsável de resíduos</li><li>Uso eficiente de água e recursos</li></ul></div>
+      <div class="esg-card reveal"><div class="esg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 7-9 16-9 0 9-3 16-9 16Z"/><path d="M4 21c3-6 7-9 11-11"/></svg></div><div class="k">100%</div><h3>Bem-estar animal</h3><p>Ambientes controlados e higienizados, nutrição balanceada e equipe treinada em manejo responsável.</p><ul><li>Protocolos sanitários rigorosos</li><li>Rastreabilidade por lote</li></ul></div>
       <div class="esg-card social reveal"><div class="esg-photo"><img src="https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/posts/e775497d-d07d-4c25-bab4-d50470ff397d/1790778194559-IMG_7020.jpg" alt="Copa Moriz, evento com colaboradores" loading="lazy"></div><div class="k" style="font-size:34px">♥</div><h3>Espaço Vida & Bendita Sopa</h3><p>Iniciativas sociais do grupo que levam alimento, acolhimento e desenvolvimento para a comunidade de Valença e região.</p></div>
     </div>
   </div>
@@ -348,7 +386,7 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
         <div class="perk"><i>✓</i><span>Mix completo: ovos, frango resfriado, leite e queijo</span></div>
         <div class="perk"><i>✓</i><span>Atendimento comercial dedicado: (89) 9 8802-4200</span></div>
       </div>
-      <div class="b2b-photo"><img src="https://www.grupomoriz.com.br/maos-ovos.png" alt="Classificação de ovos" loading="lazy"></div>
+      <div class="b2b-photo"><img src="https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/site/home.hero.s4.desktop/1790787894238-BANNER-site-moriz-.png" alt="Linha Karilan Alimentos" loading="lazy"></div>
     </div>
     <form class="lead reveal" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset();">
       <h3>Quero ser parceiro</h3>
@@ -371,7 +409,6 @@ footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-si
   </div>
 </footer>
 
-<script src="js/three.min.js"></script>
 <script>
 (function(){
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -396,157 +433,6 @@ document.querySelectorAll('.num').forEach(c=>{
   c.addEventListener('pointerleave',()=>c.style.transform='');
 });
 
-if(typeof THREE==='undefined')return;
-
-/* ---------- HERO EGG ---------- */
-(function(){
-  const canvas=document.getElementById('egg');
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.outputEncoding=THREE.sRGBEncoding;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  const scene=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(35,1,.1,100);cam.position.set(0,0,9);
-
-  // egg profile
-  const pts=[];for(let i=0;i<=64;i++){const t=i/64*Math.PI;const y=-Math.cos(t)*1.3;let r=Math.sin(t)*0.95*(1-0.16*Math.cos(t));pts.push(new THREE.Vector2(Math.max(r,0.0001),y));}
-  const eggGeo=new THREE.LatheGeometry(pts,96);
-  const eggMat=new THREE.MeshPhysicalMaterial({color:0xf3d2a3,roughness:.42,metalness:0,clearcoat:.6,clearcoatRoughness:.35});
-  const egg=new THREE.Mesh(eggGeo,eggMat);
-  const group=new THREE.Group();group.add(egg);scene.add(group);
-
-  // orbit rings (green + orange like brand swoosh)
-  function ring(color,r,tube,rx,rz){const m=new THREE.Mesh(new THREE.TorusGeometry(r,tube,24,200,Math.PI*1.35),new THREE.MeshStandardMaterial({color,roughness:.35,metalness:.2,emissive:color,emissiveIntensity:.15}));m.rotation.set(rx,0,rz);return m}
-  const r1=ring(0x7cc243,2.15,.07,1.25,.4), r2=ring(0xf07d1e,2.55,.05,1.1,-.6);
-  group.add(r1,r2);
-
-  // floating grains / particles
-  const N=500,pos=new Float32Array(N*3);for(let i=0;i<N;i++){const r=3+Math.random()*7,a=Math.random()*Math.PI*2,y=(Math.random()-.5)*8;pos[i*3]=Math.cos(a)*r;pos[i*3+1]=y;pos[i*3+2]=Math.sin(a)*r-3;}
-  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  const pts3=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffc078,size:.035,transparent:true,opacity:.7}));scene.add(pts3);
-
-  // small satellite eggs
-  const sats=[];for(let i=0;i<3;i++){const s=new THREE.Mesh(eggGeo,new THREE.MeshPhysicalMaterial({color:i==1?0xfff7ea:0xe9b77a,roughness:.5,clearcoat:.4}));s.scale.setScalar(.22+i*.05);scene.add(s);sats.push({m:s,a:i*2.1,r:3+i*.4,sp:.25+i*.08,y:(i-1)*1.3});}
-
-  scene.add(new THREE.HemisphereLight(0xfff4e0,0x1b3b24,.9));
-  const key=new THREE.DirectionalLight(0xffe2b8,2.2);key.position.set(4,5,6);scene.add(key);
-  const rim=new THREE.PointLight(0x7cc243,3,20);rim.position.set(-4,-1,-2);scene.add(rim);
-  const rim2=new THREE.PointLight(0xf07d1e,2.5,20);rim2.position.set(3,-3,3);scene.add(rim2);
-
-  let mx=0,my=0,baseY=0.1;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
-  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
-    const mobile=w<900;baseY=mobile?(0.5-200/h)*2*9*Math.tan(17.5*Math.PI/180):0.1;group.position.set(mobile?0.3:2.3,baseY,0);group.scale.setScalar(mobile?.36:1);}
-  size();addEventListener('resize',size);
-  let visible=true;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(canvas);
-  const clock=new THREE.Clock();
-  (function loop(){requestAnimationFrame(loop);if(!visible)return;const t=reduce?0:clock.getElapsedTime();
-    const sc=Math.min(scrollY/innerHeight,1);
-    egg.rotation.y=t*.35;group.rotation.x+=(my*.4-group.rotation.x)*.05;group.rotation.y+=(mx*.6-group.rotation.y)*.05;
-    group.position.y+=(baseY+Math.sin(t*1.2)*.08-sc*1.5-group.position.y)*.1;
-    r1.rotation.z=.4+t*.25;r2.rotation.z=-.6-t*.18;
-    pts3.rotation.y=t*.03;
-    sats.forEach(s=>{const a=s.a+t*s.sp;s.m.position.set(group.position.x+Math.cos(a)*s.r,group.position.y+s.y+Math.sin(t+s.a)*.2,Math.sin(a)*s.r);s.m.rotation.set(t*.6,t*.4,.3)});
-    renderer.render(scene,cam);})();
-})();
-
-/* ---------- FARM SCENE ---------- */
-(function(){
-  const canvas=document.getElementById('farm');
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputEncoding=THREE.sRGBEncoding;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  const scene=new THREE.Scene();scene.fog=new THREE.Fog(0xf3e4c6,40,90);
-  const cam=new THREE.PerspectiveCamera(38,1,.1,200);
-  const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.85,flatShading:true},o));
-
-  // ground
-  const gGeo=new THREE.CircleGeometry(40,64);const ground=new THREE.Mesh(gGeo,M(0xc9b37e));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
-  const grass=new THREE.Mesh(new THREE.CircleGeometry(26,64),M(0x8fb45a));grass.rotation.x=-Math.PI/2;grass.position.y=.01;grass.receiveShadow=true;scene.add(grass);
-  // roads
-  const road=new THREE.Mesh(new THREE.PlaneGeometry(2.2,48),M(0xd8c7a0));road.rotation.x=-Math.PI/2;road.position.set(0,.02,0);road.receiveShadow=true;scene.add(road);
-  const road2=road.clone();road2.rotation.z=Math.PI/2;road2.position.set(0,.021,-1);scene.add(road2);
-
-  const pick=[];
-  // aviaries (long sheds)
-  const aviaries=new THREE.Group();
-  function shed(x,z){const g=new THREE.Group();
-    const body=new THREE.Mesh(new THREE.BoxGeometry(2.2,1.1,12),M(0xf5efe3));body.position.y=.55;body.castShadow=body.receiveShadow=true;g.add(body);
-    const roofG=new THREE.CylinderGeometry(1.45,1.45,12.4,3,1,false);const roof=new THREE.Mesh(roofG,M(0x9aa6a8,{roughness:.5,metalness:.3}));roof.rotation.x=Math.PI/2;roof.rotation.y=Math.PI;roof.scale.set(1,1,.45);roof.position.y=1.45;roof.rotation.z=Math.PI/2;
-    // simpler gable roof
-    const shape=new THREE.Shape();shape.moveTo(-1.35,0);shape.lineTo(0,.75);shape.lineTo(1.35,0);shape.lineTo(-1.35,0);
-    const gable=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:12.4,bevelEnabled:false}),M(0x93a2a6,{roughness:.45,metalness:.35}));gable.position.set(0,1.1,-6.2);gable.castShadow=true;g.add(gable);
-    // green stripe (curtain)
-    const stripe=new THREE.Mesh(new THREE.BoxGeometry(2.24,.35,11.6),M(0x3d9a3a));stripe.position.y=.6;g.add(stripe);
-    // fans
-    for(let i=-1;i<=1;i+=2){const f=new THREE.Mesh(new THREE.BoxGeometry(1.6,.7,.08),M(0x2b3b33));f.position.set(0,.55,6.02*i);g.add(f);}
-    g.position.set(x,0,z);return g;}
-  [[-11,-10],[-8,-10],[-5,-10],[-11,9],[-8,9],[-5,9],[5,9],[8,9],[11,9]].forEach(p=>aviaries.add(shed(p[0],p[1])));
-  scene.add(aviaries);
-
-  // solar field
-  const solar=new THREE.Group();
-  const panelM=M(0x1d3a6b,{roughness:.25,metalness:.6,flatShading:false});const legM=M(0x777777);
-  for(let r=0;r<5;r++)for(let c=0;c<7;c++){const p=new THREE.Mesh(new THREE.BoxGeometry(1.3,.06,.9),panelM);p.position.set(5+c*1.45,.75,-14+r*1.6);p.rotation.x=-.45;p.castShadow=true;solar.add(p);
-    const l=new THREE.Mesh(new THREE.BoxGeometry(.08,.7,.08),legM);l.position.set(p.position.x,.35,p.position.z);solar.add(l);}
-  scene.add(solar);
-
-  // feed mill (silos + building)
-  const mill=new THREE.Group();
-  const bld=new THREE.Mesh(new THREE.BoxGeometry(4,2.6,3),M(0xf2ede2));bld.position.set(0,1.3,0);bld.castShadow=true;mill.add(bld);
-  const band=new THREE.Mesh(new THREE.BoxGeometry(4.04,.45,3.04),M(0xf07d1e));band.position.set(0,2.2,0);mill.add(band);
-  for(let i=0;i<3;i++){const s=new THREE.Mesh(new THREE.CylinderGeometry(.75,.75,4,20),M(0xcfd6d8,{metalness:.5,roughness:.35,flatShading:false}));s.position.set(-1.3+i*1.3,2,-2.6);s.castShadow=true;mill.add(s);
-    const top=new THREE.Mesh(new THREE.ConeGeometry(.8,.7,20),M(0xb8c0c2,{metalness:.5,roughness:.35}));top.position.set(s.position.x,4.35,-2.6);mill.add(top);}
-  const tower=new THREE.Mesh(new THREE.BoxGeometry(.6,5.6,.6),M(0x3d9a3a));tower.position.set(2.4,2.8,-2.4);tower.castShadow=true;mill.add(tower);
-  mill.position.set(-9,0,-1);scene.add(mill);
-
-  // HQ / packing
-  const hq=new THREE.Mesh(new THREE.BoxGeometry(5,1.6,3.2),M(0xffffff));hq.position.set(8.5,.8,-1.5);hq.castShadow=true;scene.add(hq);
-  const hqR=new THREE.Mesh(new THREE.BoxGeometry(5.2,.2,3.4),M(0x3d9a3a));hqR.position.set(8.5,1.7,-1.5);scene.add(hqR);
-
-  // trucks
-  const trucks=[];for(let i=0;i<2;i++){const t=new THREE.Group();const cab=new THREE.Mesh(new THREE.BoxGeometry(.8,.8,.8),M(0xf07d1e));cab.position.set(0,.55,.9);const box=new THREE.Mesh(new THREE.BoxGeometry(.9,1,1.8),M(0xffffff));box.position.y=.65;cab.castShadow=box.castShadow=true;t.add(cab,box);scene.add(t);trucks.push({g:t,o:i*.5});}
-
-  // trees (caatinga)
-  const trunkM=M(0x7a5a3a),leafMs=[M(0x5f8f3a),M(0x6fa043),M(0x4c7a2f)];
-  for(let i=0;i<120;i++){const a=Math.random()*Math.PI*2,r=17+Math.random()*20;const x=Math.cos(a)*r,z=Math.sin(a)*r;
-    const t=new THREE.Group();const s=.6+Math.random()*.9;const tr=new THREE.Mesh(new THREE.CylinderGeometry(.08,.12,.8,5),trunkM);tr.position.y=.4;
-    const lf=new THREE.Mesh(new THREE.IcosahedronGeometry(.75,0),leafMs[i%3]);lf.position.y=1.15;lf.scale.y=.75;lf.castShadow=true;t.add(tr,lf);t.position.set(x,0,z);t.scale.setScalar(s);scene.add(t);}
-
-  scene.add(new THREE.HemisphereLight(0xfff6e6,0x6a5a38,.5));
-  const sun=new THREE.DirectionalLight(0xfff0d0,1.05);sun.position.set(18,26,12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
-  Object.assign(sun.shadow.camera,{left:-25,right:25,top:25,bottom:-25,near:1,far:80});scene.add(sun);
-
-  // views
-  const views=[
-    {t:[0,0,0],d:34,ph:.95,th:.7,e:'Visão geral',h:'Uma cadeia integrada',p:'Ração própria, aviários climatizados, classificação de ovos e energia solar: tudo no mesmo território, com controle de ponta a ponta.'},
-    {t:[-8,0,9],d:26,ph:.85,th:1.9,e:'Aviários',h:'Aves com conforto e controle',p:'Galpões climatizados com ventilação, cortinas e manejo automatizado garantem bem-estar e produtividade todos os dias.'},
-    {t:[9,0,-11],d:16,ph:.9,th:.35,e:'Energia solar',h:'3.500+ placas solares',p:'Energia limpa abastece granjas e unidades, reduzindo custos e a pegada ambiental da produção.'},
-    {t:[-9,2,-2],d:15,ph:1.05,th:-.6,e:'Fábrica de ração',h:'Nutrição feita em casa',p:'A fábrica na Chapada dos Correios garante dieta balanceada, rastreabilidade e independência de fornecedores.'}
-  ];
-  const cur={t:new THREE.Vector3(),d:34,ph:.95,th:.7};const tgt={t:new THREE.Vector3(),d:34,ph:.95,th:.7};
-  function setView(i){const v=views[i];tgt.t.set(...v.t);tgt.d=v.d;tgt.ph=v.ph;tgt.th=v.th;
-    document.getElementById('fc-eyebrow').textContent=v.e;document.getElementById('fc-title').textContent=v.h;document.getElementById('fc-text').textContent=v.p;
-    document.querySelectorAll('.farm-tabs button').forEach(b=>b.classList.toggle('on',+b.dataset.v===i));}
-  document.querySelectorAll('.farm-tabs button').forEach(b=>b.addEventListener('click',()=>setView(+b.dataset.v)));
-
-  // drag
-  let drag=false,lx=0,ly=0,idle=0;
-  canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;canvas.setPointerCapture(e.pointerId)});
-  canvas.addEventListener('pointerup',()=>drag=false);
-  canvas.addEventListener('pointermove',e=>{if(!drag)return;tgt.th-=(e.clientX-lx)*.006;tgt.ph=Math.min(1.35,Math.max(.35,tgt.ph-(e.clientY-ly)*.004));lx=e.clientX;ly=e.clientY;idle=0});
-  canvas.addEventListener('wheel',e=>{e.preventDefault();tgt.d=Math.min(55,Math.max(10,tgt.d+e.deltaY*.02))},{passive:false});
-
-  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
-  size();addEventListener('resize',size);
-  let visible=false;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(canvas);
-  const clock=new THREE.Clock();
-  (function loop(){requestAnimationFrame(loop);const dt=clock.getDelta();if(!visible)return;const t=clock.elapsedTime;
-    idle+=dt;if(!drag&&idle>2&&!reduce)tgt.th+=dt*.06;
-    cur.t.lerp(tgt.t,.05);cur.d+=(tgt.d-cur.d)*.05;cur.ph+=(tgt.ph-cur.ph)*.06;cur.th+=(tgt.th-cur.th)*.06;
-    cam.position.set(cur.t.x+cur.d*Math.sin(cur.ph)*Math.sin(cur.th),cur.t.y+cur.d*Math.cos(cur.ph),cur.t.z+cur.d*Math.sin(cur.ph)*Math.cos(cur.th));cam.lookAt(cur.t);
-    trucks.forEach(k=>{const p=((t*.06+k.o)%1)*44-22;k.g.position.set(.5*(k.o?-1:1),0,k.o?-p:p);k.g.rotation.y=k.o?Math.PI:0});
-    renderer.render(scene,cam);})();
-})();
 })();
 </script>
 </body>

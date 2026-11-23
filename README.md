@@ -3,17 +3,16 @@
 Proposta conceitual de site para o **Grupo Moriz / Granja Moreira** (Valença do Piauí – PI), feita pela Inetris.
 
 ## O que tem
-- Abertura com ovo 3D interativo (Three.js) sobre a vista aérea dos aviários
-- Linha do tempo da empresa (1987 → 2026)
+- Abertura com foto da família Moreira
+- Linha do tempo da empresa (1987 → 2026) com foto do fundador
 - Números animados
-- Tour 3D do complexo de Valença (arrastar para girar, botões por área)
+- Estrutura produtiva com a vista aérea dos aviários
 - Negócios, sustentabilidade e ações sociais com fotos reais
 - Formulário para revendedores (demonstração: ainda não envia dados)
 
 ## Estrutura
 ```
 index.html        página completa (HTML + CSS + JS)
-js/three.min.js   Three.js r128 (licença MIT em js/three.LICENSE)
 ```
 
 ## Rodar localmente
