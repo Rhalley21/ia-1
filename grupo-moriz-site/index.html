@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grupo Moriz — Proposta de Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#3d9a3a; --green-2:#7cc243; --deep:#0c2416; --deep-2:#143522;
+  --orange:#f07d1e; --orange-2:#ffb45c; --cream:#fbf6ec; --cream-2:#f3ead7;
+  --ink:#10241a; --muted:#5b6b60; --line:rgba(16,36,26,.12);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1200px,100% - 32px);margin-inline:auto}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;border:0}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 30px -10px rgba(240,125,30,.7)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -12px rgba(240,125,30,.8)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.16)}
+
+/* concept ribbon */
+.ribbon{position:fixed;bottom:16px;left:16px;z-index:60;background:var(--deep);color:#fff;font-size:12px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.15);opacity:.85}
+.ribbon b{color:var(--orange-2)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .35s,box-shadow .35s}
+nav.solid{background:rgba(12,36,22,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800}
+.logo svg{height:34px}
+.logo small{display:block;font-size:9px;letter-spacing:.3em;font-weight:600;opacity:.75}
+.logo span{font-family:Fraunces,serif;font-size:26px;line-height:1}
+.navlinks{display:flex;gap:28px;color:rgba(255,255,255,.85);font-size:14px;font-weight:500}
+.navlinks a:hover{color:var(--orange-2)}
+.nav-cta{padding:11px 18px;font-size:14px}
+@media(max-width:900px){.navlinks{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100vh;background:radial-gradient(1200px 700px at 75% 40%,#1f4a2c 0%,var(--deep) 60%,#07170e 100%);color:#fff;overflow:hidden;display:flex;align-items:center}
+#egg{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;padding-top:90px;padding-bottom:60px;pointer-events:none}
+.hero .wrap *{pointer-events:auto}
+.hero h1{font-size:clamp(42px,6.4vw,88px);line-height:.98;font-weight:600}
+.hero h1 em{font-style:italic;color:var(--orange-2);font-weight:400}
+.hero p.lead{margin-top:24px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:rgba(255,255,255,.78);max-width:520px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.badge39{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);font-size:13px;margin-bottom:26px}
+.badge39 b{background:var(--orange);border-radius:999px;padding:4px 10px;font-size:12px}
+.hero-stats{position:absolute;z-index:2;bottom:0;left:0;right:0;border-top:1px solid rgba(255,255,255,.1);background:linear-gradient(transparent,rgba(0,0,0,.25))}
+.hero-stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:22px 0;gap:0;grid-template-rows:auto}
+.hs{padding:0 18px;border-left:1px solid rgba(255,255,255,.1)}
+.hs:first-child{border-left:0;padding-left:0}
+.hs b{font-family:Fraunces,serif;font-size:clamp(22px,2.4vw,32px);font-weight:600;display:block}
+.hs span{font-size:12.5px;color:rgba(255,255,255,.65)}
+.scroll-hint{position:absolute;right:32px;bottom:120px;z-index:2;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);writing-mode:vertical-rl}
+@media(max-width:900px){
+  .hero{flex-direction:column;align-items:stretch}
+  .hero .wrap{grid-template-columns:1fr;padding-top:330px;padding-bottom:40px}
+  .hero-stats{position:relative}
+  .hero-stats .wrap{grid-template-columns:repeat(2,1fr);row-gap:16px}
+  .hs:nth-child(3){border-left:0;padding-left:0}
+  .scroll-hint{display:none}
+}
+
+/* sections */
+section{padding:120px 0;position:relative}
+.sec-head{max-width:720px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(34px,4.4vw,58px);line-height:1.04;font-weight:600;margin-top:14px}
+.sec-head p{margin-top:18px;color:var(--muted);font-size:17px;line-height:1.65}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:start}
+.quote{position:sticky;top:110px;background:var(--deep);color:#fff;border-radius:28px;padding:44px;overflow:hidden}
+.quote::after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(240,125,30,.45),transparent 70%);right:-120px;bottom:-120px}
+.quote .big{font-family:Fraunces,serif;font-size:clamp(26px,2.6vw,36px);line-height:1.2;font-style:italic;position:relative;z-index:1}
+.quote .who{margin-top:26px;font-size:14px;color:rgba(255,255,255,.7);position:relative;z-index:1}
+.quote .who b{color:#fff;display:block;font-size:16px}
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--green),var(--orange))}
+.tl{position:relative;padding:0 0 46px}
+.tl::before{content:"";position:absolute;left:-36px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--cream);border:3px solid var(--green)}
+.tl:last-child::before{border-color:var(--orange)}
+.tl .yr{font-family:Fraunces,serif;font-size:42px;font-weight:600;color:var(--green);line-height:1}
+.tl:last-child .yr{color:var(--orange)}
+.tl h3{font-size:22px;margin:8px 0 8px;font-weight:600}
+.tl p{color:var(--muted);line-height:1.65}
+@media(max-width:900px){.story-grid{grid-template-columns:1fr;gap:50px}.quote{position:relative;top:0}}
+
+/* numbers */
+.numbers{background:var(--deep);color:#fff;overflow:hidden}
+.numbers .sec-head p{color:rgba(255,255,255,.65)}
+.numbers .eyebrow{color:var(--green-2)}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.num{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:30px 26px;transform-style:preserve-3d;transition:transform .2s ease-out;will-change:transform}
+.num .v{font-family:Fraunces,serif;font-size:clamp(40px,4.2vw,60px);font-weight:600;line-height:1;background:linear-gradient(120deg,#fff,var(--orange-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.num .l{margin-top:12px;font-size:14px;color:rgba(255,255,255,.7);line-height:1.5}
+.num .ic{width:44px;height:44px;border-radius:12px;background:rgba(124,194,67,.15);display:grid;place-items:center;margin-bottom:26px;color:var(--green-2)}
+@media(max-width:900px){.num-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.num-grid{grid-template-columns:1fr}}
+
+/* farm 3D */
+.farm{background:linear-gradient(180deg,var(--deep) 0%,#163a24 100%);color:#fff;padding-top:40px}
+.farm-stage{position:relative;height:min(78vh,720px);border-radius:32px;overflow:hidden;background:linear-gradient(180deg,#bfe3f2 0%,#f8e7c8 70%);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+#farm{width:100%;height:100%;display:block;cursor:grab}
+#farm:active{cursor:grabbing}
+.farm-card{position:absolute;left:24px;top:24px;max-width:360px;background:rgba(12,36,22,.82);backdrop-filter:blur(12px);border-radius:20px;padding:24px;border:1px solid rgba(255,255,255,.12)}
+.farm-card h3{font-size:24px;font-weight:600;margin:8px 0}
+.farm-card p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.75)}
+.farm-tabs{position:absolute;right:24px;bottom:24px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.farm-tabs button{font:600 13px Inter,sans-serif;background:rgba(12,36,22,.8);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 16px;border-radius:999px;cursor:pointer;backdrop-filter:blur(10px);transition:.25s}
+.farm-tabs button.on,.farm-tabs button:hover{background:var(--orange);border-color:var(--orange)}
+.drag-hint{position:absolute;left:24px;bottom:24px;font-size:12px;color:var(--deep);background:rgba(255,255,255,.75);padding:8px 12px;border-radius:999px}
+@media(max-width:700px){.farm-card{left:12px;right:12px;top:12px;max-width:none;padding:18px}.farm-card p{display:none}.farm-tabs{right:12px;left:12px;bottom:12px;justify-content:center}.drag-hint{display:none}}
+
+/* business */
+.biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.biz{position:relative;background:#fff;border-radius:var(--r);padding:32px;border:1px solid var(--line);overflow:hidden;transition:transform .35s,box-shadow .35s;min-height:280px;display:flex;flex-direction:column}
+.biz:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(12,36,22,.35)}
+.biz .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:rgba(61,154,58,.12);color:var(--green)}
+.biz .tag.fut{background:rgba(240,125,30,.14);color:#c45f0b}
+.biz h3{font-size:28px;font-weight:600;margin:22px 0 10px}
+.biz p{color:var(--muted);line-height:1.6;font-size:15px}
+.biz .orb{position:absolute;right:-40px;bottom:-40px;width:150px;height:150px;border-radius:50%;opacity:.9}
+.biz.feature{grid-column:span 2;background:var(--deep);color:#fff;border:0}
+.biz.feature p{color:rgba(255,255,255,.72)}
+.biz.feature .tag{background:rgba(255,180,92,.18);color:var(--orange-2)}
+.biz .brand{font-family:Fraunces,serif;font-weight:800;font-size:15px;color:var(--orange)}
+@media(max-width:900px){.biz-grid{grid-template-columns:1fr}.biz.feature{grid-column:auto}}
+
+/* esg */
+.esg{background:var(--cream-2)}
+.esg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.esg-card{border-radius:var(--r);padding:34px;background:#fff;border:1px solid var(--line)}
+.esg-card .k{font-family:Fraunces,serif;font-size:48px;font-weight:600;color:var(--green);line-height:1}
+.esg-card h3{font-size:22px;margin:16px 0 10px;font-weight:600}
+.esg-card p,.esg-card li{color:var(--muted);line-height:1.6;font-size:15px}
+.esg-card ul{list-style:none;margin-top:12px}
+.esg-card li{padding-left:22px;position:relative;margin-top:6px}
+.esg-card li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:10px;border-radius:50%;background:var(--green-2)}
+.esg-card.social{background:var(--orange);color:#fff;border:0}
+.esg-card.social .k{color:#fff}
+.esg-card.social p{color:rgba(255,255,255,.9)}
+@media(max-width:900px){.esg-grid{grid-template-columns:1fr}}
+
+/* b2b */
+.b2b{background:var(--deep);color:#fff}
+.b2b-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.b2b h2{font-size:clamp(34px,4.4vw,56px);line-height:1.04;font-weight:600;margin-top:14px}
+.b2b .eyebrow{color:var(--green-2)}
+.b2b p.lead{margin-top:18px;color:rgba(255,255,255,.72);font-size:17px;line-height:1.65}
+.perks{margin-top:30px;display:grid;gap:14px}
+.perk{display:flex;gap:14px;align-items:flex-start}
+.perk i{flex:none;width:28px;height:28px;border-radius:8px;background:rgba(124,194,67,.18);display:grid;place-items:center;color:var(--green-2);font-style:normal;font-weight:700}
+.perk span{color:rgba(255,255,255,.85);line-height:1.5}
+form.lead{background:#fff;color:var(--ink);border-radius:28px;padding:36px;display:grid;gap:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}
+form.lead h3{font-size:26px;font-weight:600}
+form.lead label{font-size:13px;font-weight:600;color:var(--muted);display:grid;gap:6px}
+form.lead input,form.lead select{font:inherit;font-size:15px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--cream);color:var(--ink)}
+form.lead input:focus,form.lead select:focus{outline:2px solid var(--green);border-color:transparent}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ok{display:none;padding:14px;border-radius:12px;background:rgba(61,154,58,.12);color:var(--green);font-weight:600}
+@media(max-width:900px){.b2b-grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+
+/* real photos */
+.hero-photo{position:absolute;inset:0;background:url("https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/site/home.hero.s1.desktop/1790787444319-HA_%2038%20ANOS%20MULTIPLICANDO%20O%20BEM_.png") right 30% / 290% auto no-repeat;opacity:.32;filter:saturate(1.1)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--deep) 0%,rgba(12,36,22,.55) 45%,rgba(12,36,22,.15) 100%)}
+.story-photo{position:relative;border-radius:28px;overflow:hidden;margin-bottom:18px;aspect-ratio:4/4.4;background:#ddd}
+.story-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.story-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 22px 18px;color:#fff;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.story-sticky{position:sticky;top:100px}
+.story-sticky .quote{position:relative;top:0}
+.biz.feature{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;padding:0;overflow:hidden}
+.biz.feature .txt{padding:32px}
+.biz.feature img{width:100%;height:100%;object-fit:cover;display:block;min-height:280px}
+.biz-photo{margin:-32px -32px 22px;height:190px;overflow:hidden}
+.biz-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.biz:hover .biz-photo img,.esg-card:hover .esg-photo img{transform:scale(1.05)}
+.esg-card{overflow:hidden}
+.esg-photo{margin:-34px -34px 24px;height:200px;overflow:hidden}
+.esg-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.b2b-photo{margin-top:30px;border-radius:22px;overflow:hidden;height:220px}
+.b2b-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:900px){.biz.feature{grid-template-columns:1fr}.biz.feature img{min-height:220px}.story-sticky{position:relative;top:0}.hero-photo{background-size:auto 60%;background-position:right top}}
+
+/* footer */
+footer{background:#07170e;color:rgba(255,255,255,.7);padding:70px 0 90px;font-size:14px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+.foot h4{color:#fff;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.foot p{line-height:1.8}
+@media(max-width:900px){.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<div class="ribbon">Proposta conceitual · <b>Inetris</b> para Grupo Moriz</div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Grupo Moriz">
+      <svg viewBox="0 0 40 40" fill="none"><path d="M6 28c8 6 22 6 30-6" stroke="#7cc243" stroke-width="5" stroke-linecap="round"/><path d="M10 20c4-10 16-14 24-8" stroke="#f07d1e" stroke-width="5" stroke-linecap="round"/></svg>
+      <div><small>GRUPO</small><span>moriz</span></div>
+    </a>
+    <div class="navlinks">
+      <a href="#historia">História</a><a href="#numeros">Números</a><a href="#complexo">Complexo 3D</a><a href="#negocios">Negócios</a><a href="#esg">Sustentabilidade</a>
+    </div>
+    <a href="#parceiros" class="btn btn-primary nav-cta">Seja um revendedor</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-photo"></div>
+  <canvas id="egg"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="badge39 reveal"><b>39 anos</b> Valença do Piauí · desde 1987</div>
+      <h1 class="reveal">Do sertão do Piauí para a <em>mesa do Nordeste.</em></h1>
+      <p class="lead reveal">Começou com um Chevette vendido e um pequeno aviário. Hoje, o Grupo Moriz é o maior produtor de ovos do Piauí — e leva a marca Karilan a milhões de famílias, com tecnologia, energia limpa e gente da nossa terra.</p>
+      <div class="ctas reveal">
+        <a href="#parceiros" class="btn btn-primary">Quero revender Karilan →</a>
+        <a href="#historia" class="btn btn-ghost">Conheça nossa história</a>
+      </div>
+    </div>
+    <div></div>
+  </div>
+  <div class="scroll-hint">role para explorar</div>
+  <div class="hero-stats">
+    <div class="wrap">
+      <div class="hs"><b>+10 mi</b><span>ovos produzidos por mês</span></div>
+      <div class="hs"><b>+240 t</b><span>de frango por mês</span></div>
+      <div class="hs"><b>+300</b><span>colaboradores diretos</span></div>
+      <div class="hs"><b>3.500+</b><span>placas solares</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Nossa história</div>
+      <h2>Uma aposta ousada que virou referência no agro piauiense.</h2>
+    </div>
+    <div class="story-grid">
+      <div class="story-sticky reveal"><figure class="story-photo"><img src="https://www.grupomoriz.com.br/imagemfamiliasobrenos.jpeg" alt="Carlos José Moreira com a nova geração da família" loading="lazy"><figcaption>Carlos José Moreira (ao centro) com a nova geração da família</figcaption></figure>
+      <div class="quote">
+        <div class="big">“Vendi o único bem que eu tinha, um Chevette branco, para comprar uma pequena granja em Valença. Era tudo ou nada.”</div>
+        <div class="who"><b>Carlos José Marreiros Moreira</b>Fundador do Grupo Moriz</div>
+      </div></div>
+      <div class="timeline">
+        <div class="tl reveal"><div class="yr">1987</div><h3>O começo em quatro galpões</h3><p>O servidor público Carlos José aposta tudo em um aviário em dificuldades: quatro galpões, cerca de 700 frangos e pouca energia elétrica. Nasce a Granja Moreira.</p></div>
+        <div class="tl reveal"><div class="yr">1991</div><h3>A empresa se formaliza</h3><p>É constituída a Granja Moriz Ltda., base jurídica do que viria a ser o grupo.</p></div>
+        <div class="tl reveal"><div class="yr">2000s</div><h3>Escala e automação</h3><p>Dezenas de aviários automatizados, fábrica de ração própria na Chapada dos Correios e a marca Karilan ganhando as gôndolas.</p></div>
+        <div class="tl reveal"><div class="yr">2025</div><h3>Líder do Piauí em ovos</h3><p>O grupo assume a liderança estadual na produção de ovos e diversifica para frango resfriado, leite pasteurizado e queijo.</p></div>
+        <div class="tl reveal"><div class="yr">2026</div><h3>39 anos e a nova geração</h3><p>Sob o nome Grupo Moriz e com a nova geração na gestão, a empresa mira suínos, peixes, adubos e energia a partir de resíduos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="numbers" id="numeros">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Escala que alimenta</div>
+      <h2>Números de quem produz todos os dias.</h2>
+      <p>Uma operação integrada — da ração ao ovo embalado — que gera emprego e renda no interior do Piauí.</p>
+    </div>
+    <div class="num-grid">
+      <div class="num reveal"><div class="ic">●</div><div class="v" data-count="330" data-suffix=" mil">0</div><div class="l">ovos por dia, cerca de 10 milhões por mês</div></div>
+      <div class="num reveal"><div class="ic">▲</div><div class="v" data-count="240" data-prefix="+" data-suffix=" t">0</div><div class="l">de frango resfriado por mês</div></div>
+      <div class="num reveal"><div class="ic">◆</div><div class="v" data-count="300" data-prefix="+">0</div><div class="l">colaboradores diretos em Valença do Piauí</div></div>
+      <div class="num reveal"><div class="ic">☀</div><div class="v" data-count="3500" data-prefix="+">0</div><div class="l">placas solares em granjas e unidades</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="farm" id="complexo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="color:var(--green-2)">Tour 3D</div>
+      <h2>Explore o complexo de Valença.</h2>
+      <p style="color:rgba(255,255,255,.7)">Arraste para girar. Toque nas áreas para conhecer cada etapa da cadeia produtiva.</p>
+    </div>
+    <div class="farm-stage reveal">
+      <canvas id="farm"></canvas>
+      <div class="farm-card"><div class="eyebrow" id="fc-eyebrow" style="color:var(--orange-2)">Visão geral</div><h3 id="fc-title">Uma cadeia integrada</h3><p id="fc-text">Ração própria, aviários climatizados, classificação de ovos e energia solar: tudo no mesmo território, com controle de ponta a ponta.</p></div>
+      <div class="farm-tabs">
+        <button class="on" data-v="0">Visão geral</button>
+        <button data-v="1">Aviários</button>
+        <button data-v="2">Energia solar</button>
+        <button data-v="3">Fábrica de ração</button>
+      </div>
+      <div class="drag-hint">↻ arraste para girar</div>
+    </div>
+  </div>
+</section>
+
+<section id="negocios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Ecossistema Moriz</div>
+      <h2>Um grupo, várias frentes do agro.</h2>
+      <p>Da proteína animal ao laticínio, cada negócio fortalece o outro — e prepara o grupo para as próximas décadas.</p>
+    </div>
+    <div class="biz-grid">
+      <div class="biz feature reveal"><div class="txt"><span class="tag">Carro-chefe</span><h3>Ovos <span class="brand">Karilan</span></h3><p>Maior produção de ovos do Piauí, com seleção rigorosa, classificação automatizada e entrega rápida para supermercados, atacarejos e food service de todo o Nordeste.</p></div><img src="https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/site/produtos.ovos.imagem/1782848933183-Banner%20site%20ovos.png" alt="Embalagens de Ovos Karilan" loading="lazy"></div>
+      <div class="biz reveal"><div class="biz-photo"><img src="https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/site/produtos.frango.imagem/1782848938388-Banner%20site.png" alt="Linha Frango Karilan" loading="lazy"></div><span class="tag">Proteína</span><h3>Frango <span class="brand">Karilan</span></h3><p>Mais de 240 toneladas por mês de frango resfriado, do aviário ao balcão.</p></div>
+      <div class="biz reveal"><span class="tag">Laticínios</span><h3>Leite & queijo</h3><p>Leite pasteurizado e queijo, levando a mesma qualidade para o café da manhã.</p></div>
+      <div class="biz reveal"><span class="tag">Nutrição animal</span><h3>Fábrica de ração</h3><p>Produção própria na Chapada dos Correios: controle total da nutrição e do custo.</p></div>
+      <div class="biz reveal"><span class="tag fut">Próximos passos</span><h3>Suínos, peixes & adubos</h3><p>Novas frentes no plano estratégico, com resíduos virando energia e fertilizante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="esg" id="esg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Responsabilidade</div>
+      <h2>Produzir bem é cuidar da terra, das aves e das pessoas.</h2>
+    </div>
+    <div class="esg-grid">
+      <div class="esg-card reveal"><div class="esg-photo"><img src="https://www.grupomoriz.com.br/sustentabilidadeimage.png" alt="Usina de placas solares" loading="lazy"></div><div class="k">3.500+</div><h3>Energia limpa</h3><p>Placas solares em granjas e unidades, e projetos que transformam resíduos em energia.</p><ul><li>Gestão responsável de resíduos</li><li>Uso eficiente de água e recursos</li></ul></div>
+      <div class="esg-card reveal"><div class="esg-photo"><img src="https://www.grupomoriz.com.br/bemestaranimal.png" alt="Cuidado com as aves" loading="lazy"></div><div class="k">100%</div><h3>Bem-estar animal</h3><p>Ambientes controlados e higienizados, nutrição balanceada e equipe treinada em manejo responsável.</p><ul><li>Protocolos sanitários rigorosos</li><li>Rastreabilidade por lote</li></ul></div>
+      <div class="esg-card social reveal"><div class="esg-photo"><img src="https://nnfnifihcfwagdhtoobe.supabase.co/storage/v1/object/public/media/posts/e775497d-d07d-4c25-bab4-d50470ff397d/1790778194559-IMG_7020.jpg" alt="Copa Moriz, evento com colaboradores" loading="lazy"></div><div class="k" style="font-size:34px">♥</div><h3>Espaço Vida & Bendita Sopa</h3><p>Iniciativas sociais do grupo que levam alimento, acolhimento e desenvolvimento para a comunidade de Valença e região.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="b2b" id="parceiros">
+  <div class="wrap b2b-grid">
+    <div class="reveal">
+      <div class="eyebrow">Para supermercados, atacados e food service</div>
+      <h2>Leve Karilan para o seu negócio.</h2>
+      <p class="lead">Fornecimento constante, padrão de qualidade e logística que conhece o Nordeste. Fale direto com nossa equipe comercial.</p>
+      <div class="perks">
+        <div class="perk"><i>✓</i><span>Volume e regularidade de quem produz +10 milhões de ovos por mês</span></div>
+        <div class="perk"><i>✓</i><span>Mix completo: ovos, frango resfriado, leite e queijo</span></div>
+        <div class="perk"><i>✓</i><span>Atendimento comercial dedicado: (89) 9 8802-4200</span></div>
+      </div>
+      <div class="b2b-photo"><img src="https://www.grupomoriz.com.br/maos-ovos.png" alt="Classificação de ovos" loading="lazy"></div>
+    </div>
+    <form class="lead reveal" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.reset();">
+      <h3>Quero ser parceiro</h3>
+      <div class="row2"><label>Nome<input required placeholder="Seu nome"></label><label>Empresa<input required placeholder="Nome da empresa"></label></div>
+      <div class="row2"><label>Telefone / WhatsApp<input required placeholder="(00) 00000-0000"></label><label>Cidade / UF<input placeholder="Teresina – PI"></label></div>
+      <label>Segmento<select><option>Supermercado</option><option>Atacado / distribuidor</option><option>Restaurante / food service</option><option>Padaria / confeitaria</option><option>Outro</option></select></label>
+      <label>Produtos de interesse<select><option>Ovos Karilan</option><option>Frango Karilan</option><option>Leite e queijo</option><option>Mix completo</option></select></label>
+      <button class="btn btn-primary" style="justify-content:center">Solicitar contato comercial</button>
+      <div class="ok">Recebemos! Nosso time comercial vai falar com você em breve.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><a class="logo" href="#top"><svg viewBox="0 0 40 40" fill="none" style="height:34px"><path d="M6 28c8 6 22 6 30-6" stroke="#7cc243" stroke-width="5" stroke-linecap="round"/><path d="M10 20c4-10 16-14 24-8" stroke="#f07d1e" stroke-width="5" stroke-linecap="round"/></svg><div><small>GRUPO</small><span>moriz</span></div></a><p style="margin-top:18px;max-width:300px">Desde 1987 nutrindo famílias com alimentos seguros, frescos e acessíveis.</p></div>
+    <div><h4>Onde estamos</h4><p>Rua São José, 429, Centro<br>Valença do Piauí – PI<br>CEP 64300-000</p></div>
+    <div><h4>Contato</h4><p>Comercial: (89) 9 8802-4200<br>Caixa: (89) 9 9986-1798</p></div>
+    <div><h4>Horários</h4><p>Seg a sex: 06h às 17h<br>Sábado: 06h às 12h</p></div>
+  </div>
+</footer>
+
+<script src="js/three.min.js"></script>
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* nav */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
+const fmt=n=>n.toLocaleString('pt-BR');
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count,p=el.dataset.prefix||'',s=el.dataset.suffix||'';const t0=performance.now(),d=1800;
+  (function tick(t){const k=Math.min(1,(t-t0)/d),v=Math.round(end*(1-Math.pow(1-k,4)));el.textContent=p+fmt(v)+s;if(k<1)requestAnimationFrame(tick)})(t0);
+}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* 3D tilt cards */
+document.querySelectorAll('.num').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*12}deg) rotateX(${-y*12}deg) translateZ(6px)`});
+  c.addEventListener('pointerleave',()=>c.style.transform='');
+});
+
+if(typeof THREE==='undefined')return;
+
+/* ---------- HERO EGG ---------- */
+(function(){
+  const canvas=document.getElementById('egg');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(35,1,.1,100);cam.position.set(0,0,9);
+
+  // egg profile
+  const pts=[];for(let i=0;i<=64;i++){const t=i/64*Math.PI;const y=-Math.cos(t)*1.3;let r=Math.sin(t)*0.95*(1-0.16*Math.cos(t));pts.push(new THREE.Vector2(Math.max(r,0.0001),y));}
+  const eggGeo=new THREE.LatheGeometry(pts,96);
+  const eggMat=new THREE.MeshPhysicalMaterial({color:0xf3d2a3,roughness:.42,metalness:0,clearcoat:.6,clearcoatRoughness:.35});
+  const egg=new THREE.Mesh(eggGeo,eggMat);
+  const group=new THREE.Group();group.add(egg);scene.add(group);
+
+  // orbit rings (green + orange like brand swoosh)
+  function ring(color,r,tube,rx,rz){const m=new THREE.Mesh(new THREE.TorusGeometry(r,tube,24,200,Math.PI*1.35),new THREE.MeshStandardMaterial({color,roughness:.35,metalness:.2,emissive:color,emissiveIntensity:.15}));m.rotation.set(rx,0,rz);return m}
+  const r1=ring(0x7cc243,2.15,.07,1.25,.4), r2=ring(0xf07d1e,2.55,.05,1.1,-.6);
+  group.add(r1,r2);
+
+  // floating grains / particles
+  const N=500,pos=new Float32Array(N*3);for(let i=0;i<N;i++){const r=3+Math.random()*7,a=Math.random()*Math.PI*2,y=(Math.random()-.5)*8;pos[i*3]=Math.cos(a)*r;pos[i*3+1]=y;pos[i*3+2]=Math.sin(a)*r-3;}
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const pts3=new THREE.Points(pg,new THREE.PointsMaterial({color:0xffc078,size:.035,transparent:true,opacity:.7}));scene.add(pts3);
+
+  // small satellite eggs
+  const sats=[];for(let i=0;i<3;i++){const s=new THREE.Mesh(eggGeo,new THREE.MeshPhysicalMaterial({color:i==1?0xfff7ea:0xe9b77a,roughness:.5,clearcoat:.4}));s.scale.setScalar(.22+i*.05);scene.add(s);sats.push({m:s,a:i*2.1,r:3+i*.4,sp:.25+i*.08,y:(i-1)*1.3});}
+
+  scene.add(new THREE.HemisphereLight(0xfff4e0,0x1b3b24,.9));
+  const key=new THREE.DirectionalLight(0xffe2b8,2.2);key.position.set(4,5,6);scene.add(key);
+  const rim=new THREE.PointLight(0x7cc243,3,20);rim.position.set(-4,-1,-2);scene.add(rim);
+  const rim2=new THREE.PointLight(0xf07d1e,2.5,20);rim2.position.set(3,-3,3);scene.add(rim2);
+
+  let mx=0,my=0,baseY=0.1;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+    const mobile=w<900;baseY=mobile?(0.5-200/h)*2*9*Math.tan(17.5*Math.PI/180):0.1;group.position.set(mobile?0.3:2.3,baseY,0);group.scale.setScalar(mobile?.36:1);}
+  size();addEventListener('resize',size);
+  let visible=true;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(canvas);
+  const clock=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);if(!visible)return;const t=reduce?0:clock.getElapsedTime();
+    const sc=Math.min(scrollY/innerHeight,1);
+    egg.rotation.y=t*.35;group.rotation.x+=(my*.4-group.rotation.x)*.05;group.rotation.y+=(mx*.6-group.rotation.y)*.05;
+    group.position.y+=(baseY+Math.sin(t*1.2)*.08-sc*1.5-group.position.y)*.1;
+    r1.rotation.z=.4+t*.25;r2.rotation.z=-.6-t*.18;
+    pts3.rotation.y=t*.03;
+    sats.forEach(s=>{const a=s.a+t*s.sp;s.m.position.set(group.position.x+Math.cos(a)*s.r,group.position.y+s.y+Math.sin(t+s.a)*.2,Math.sin(a)*s.r);s.m.rotation.set(t*.6,t*.4,.3)});
+    renderer.render(scene,cam);})();
+})();
+
+/* ---------- FARM SCENE ---------- */
+(function(){
+  const canvas=document.getElementById('farm');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const scene=new THREE.Scene();scene.fog=new THREE.Fog(0xf3e4c6,40,90);
+  const cam=new THREE.PerspectiveCamera(38,1,.1,200);
+  const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.85,flatShading:true},o));
+
+  // ground
+  const gGeo=new THREE.CircleGeometry(40,64);const ground=new THREE.Mesh(gGeo,M(0xc9b37e));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+  const grass=new THREE.Mesh(new THREE.CircleGeometry(26,64),M(0x8fb45a));grass.rotation.x=-Math.PI/2;grass.position.y=.01;grass.receiveShadow=true;scene.add(grass);
+  // roads
+  const road=new THREE.Mesh(new THREE.PlaneGeometry(2.2,48),M(0xd8c7a0));road.rotation.x=-Math.PI/2;road.position.set(0,.02,0);road.receiveShadow=true;scene.add(road);
+  const road2=road.clone();road2.rotation.z=Math.PI/2;road2.position.set(0,.021,-1);scene.add(road2);
+
+  const pick=[];
+  // aviaries (long sheds)
+  const aviaries=new THREE.Group();
+  function shed(x,z){const g=new THREE.Group();
+    const body=new THREE.Mesh(new THREE.BoxGeometry(2.2,1.1,12),M(0xf5efe3));body.position.y=.55;body.castShadow=body.receiveShadow=true;g.add(body);
+    const roofG=new THREE.CylinderGeometry(1.45,1.45,12.4,3,1,false);const roof=new THREE.Mesh(roofG,M(0x9aa6a8,{roughness:.5,metalness:.3}));roof.rotation.x=Math.PI/2;roof.rotation.y=Math.PI;roof.scale.set(1,1,.45);roof.position.y=1.45;roof.rotation.z=Math.PI/2;
+    // simpler gable roof
+    const shape=new THREE.Shape();shape.moveTo(-1.35,0);shape.lineTo(0,.75);shape.lineTo(1.35,0);shape.lineTo(-1.35,0);
+    const gable=new THREE.Mesh(new THREE.ExtrudeGeometry(shape,{depth:12.4,bevelEnabled:false}),M(0x93a2a6,{roughness:.45,metalness:.35}));gable.position.set(0,1.1,-6.2);gable.castShadow=true;g.add(gable);
+    // green stripe (curtain)
+    const stripe=new THREE.Mesh(new THREE.BoxGeometry(2.24,.35,11.6),M(0x3d9a3a));stripe.position.y=.6;g.add(stripe);
+    // fans
+    for(let i=-1;i<=1;i+=2){const f=new THREE.Mesh(new THREE.BoxGeometry(1.6,.7,.08),M(0x2b3b33));f.position.set(0,.55,6.02*i);g.add(f);}
+    g.position.set(x,0,z);return g;}
+  [[-11,-10],[-8,-10],[-5,-10],[-11,9],[-8,9],[-5,9],[5,9],[8,9],[11,9]].forEach(p=>aviaries.add(shed(p[0],p[1])));
+  scene.add(aviaries);
+
+  // solar field
+  const solar=new THREE.Group();
+  const panelM=M(0x1d3a6b,{roughness:.25,metalness:.6,flatShading:false});const legM=M(0x777777);
+  for(let r=0;r<5;r++)for(let c=0;c<7;c++){const p=new THREE.Mesh(new THREE.BoxGeometry(1.3,.06,.9),panelM);p.position.set(5+c*1.45,.75,-14+r*1.6);p.rotation.x=-.45;p.castShadow=true;solar.add(p);
+    const l=new THREE.Mesh(new THREE.BoxGeometry(.08,.7,.08),legM);l.position.set(p.position.x,.35,p.position.z);solar.add(l);}
+  scene.add(solar);
+
+  // feed mill (silos + building)
+  const mill=new THREE.Group();
+  const bld=new THREE.Mesh(new THREE.BoxGeometry(4,2.6,3),M(0xf2ede2));bld.position.set(0,1.3,0);bld.castShadow=true;mill.add(bld);
+  const band=new THREE.Mesh(new THREE.BoxGeometry(4.04,.45,3.04),M(0xf07d1e));band.position.set(0,2.2,0);mill.add(band);
+  for(let i=0;i<3;i++){const s=new THREE.Mesh(new THREE.CylinderGeometry(.75,.75,4,20),M(0xcfd6d8,{metalness:.5,roughness:.35,flatShading:false}));s.position.set(-1.3+i*1.3,2,-2.6);s.castShadow=true;mill.add(s);
+    const top=new THREE.Mesh(new THREE.ConeGeometry(.8,.7,20),M(0xb8c0c2,{metalness:.5,roughness:.35}));top.position.set(s.position.x,4.35,-2.6);mill.add(top);}
+  const tower=new THREE.Mesh(new THREE.BoxGeometry(.6,5.6,.6),M(0x3d9a3a));tower.position.set(2.4,2.8,-2.4);tower.castShadow=true;mill.add(tower);
+  mill.position.set(-9,0,-1);scene.add(mill);
+
+  // HQ / packing
+  const hq=new THREE.Mesh(new THREE.BoxGeometry(5,1.6,3.2),M(0xffffff));hq.position.set(8.5,.8,-1.5);hq.castShadow=true;scene.add(hq);
+  const hqR=new THREE.Mesh(new THREE.BoxGeometry(5.2,.2,3.4),M(0x3d9a3a));hqR.position.set(8.5,1.7,-1.5);scene.add(hqR);
+
+  // trucks
+  const trucks=[];for(let i=0;i<2;i++){const t=new THREE.Group();const cab=new THREE.Mesh(new THREE.BoxGeometry(.8,.8,.8),M(0xf07d1e));cab.position.set(0,.55,.9);const box=new THREE.Mesh(new THREE.BoxGeometry(.9,1,1.8),M(0xffffff));box.position.y=.65;cab.castShadow=box.castShadow=true;t.add(cab,box);scene.add(t);trucks.push({g:t,o:i*.5});}
+
+  // trees (caatinga)
+  const trunkM=M(0x7a5a3a),leafMs=[M(0x5f8f3a),M(0x6fa043),M(0x4c7a2f)];
+  for(let i=0;i<120;i++){const a=Math.random()*Math.PI*2,r=17+Math.random()*20;const x=Math.cos(a)*r,z=Math.sin(a)*r;
+    const t=new THREE.Group();const s=.6+Math.random()*.9;const tr=new THREE.Mesh(new THREE.CylinderGeometry(.08,.12,.8,5),trunkM);tr.position.y=.4;
+    const lf=new THREE.Mesh(new THREE.IcosahedronGeometry(.75,0),leafMs[i%3]);lf.position.y=1.15;lf.scale.y=.75;lf.castShadow=true;t.add(tr,lf);t.position.set(x,0,z);t.scale.setScalar(s);scene.add(t);}
+
+  scene.add(new THREE.HemisphereLight(0xfff6e6,0x6a5a38,.5));
+  const sun=new THREE.DirectionalLight(0xfff0d0,1.05);sun.position.set(18,26,12);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  Object.assign(sun.shadow.camera,{left:-25,right:25,top:25,bottom:-25,near:1,far:80});scene.add(sun);
+
+  // views
+  const views=[
+    {t:[0,0,0],d:34,ph:.95,th:.7,e:'Visão geral',h:'Uma cadeia integrada',p:'Ração própria, aviários climatizados, classificação de ovos e energia solar: tudo no mesmo território, com controle de ponta a ponta.'},
+    {t:[-8,0,9],d:26,ph:.85,th:1.9,e:'Aviários',h:'Aves com conforto e controle',p:'Galpões climatizados com ventilação, cortinas e manejo automatizado garantem bem-estar e produtividade todos os dias.'},
+    {t:[9,0,-11],d:16,ph:.9,th:.35,e:'Energia solar',h:'3.500+ placas solares',p:'Energia limpa abastece granjas e unidades, reduzindo custos e a pegada ambiental da produção.'},
+    {t:[-9,2,-2],d:15,ph:1.05,th:-.6,e:'Fábrica de ração',h:'Nutrição feita em casa',p:'A fábrica na Chapada dos Correios garante dieta balanceada, rastreabilidade e independência de fornecedores.'}
+  ];
+  const cur={t:new THREE.Vector3(),d:34,ph:.95,th:.7};const tgt={t:new THREE.Vector3(),d:34,ph:.95,th:.7};
+  function setView(i){const v=views[i];tgt.t.set(...v.t);tgt.d=v.d;tgt.ph=v.ph;tgt.th=v.th;
+    document.getElementById('fc-eyebrow').textContent=v.e;document.getElementById('fc-title').textContent=v.h;document.getElementById('fc-text').textContent=v.p;
+    document.querySelectorAll('.farm-tabs button').forEach(b=>b.classList.toggle('on',+b.dataset.v===i));}
+  document.querySelectorAll('.farm-tabs button').forEach(b=>b.addEventListener('click',()=>setView(+b.dataset.v)));
+
+  // drag
+  let drag=false,lx=0,ly=0,idle=0;
+  canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;canvas.setPointerCapture(e.pointerId)});
+  canvas.addEventListener('pointerup',()=>drag=false);
+  canvas.addEventListener('pointermove',e=>{if(!drag)return;tgt.th-=(e.clientX-lx)*.006;tgt.ph=Math.min(1.35,Math.max(.35,tgt.ph-(e.clientY-ly)*.004));lx=e.clientX;ly=e.clientY;idle=0});
+  canvas.addEventListener('wheel',e=>{e.preventDefault();tgt.d=Math.min(55,Math.max(10,tgt.d+e.deltaY*.02))},{passive:false});
+
+  function size(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  size();addEventListener('resize',size);
+  let visible=false;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(canvas);
+  const clock=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);const dt=clock.getDelta();if(!visible)return;const t=clock.elapsedTime;
+    idle+=dt;if(!drag&&idle>2&&!reduce)tgt.th+=dt*.06;
+    cur.t.lerp(tgt.t,.05);cur.d+=(tgt.d-cur.d)*.05;cur.ph+=(tgt.ph-cur.ph)*.06;cur.th+=(tgt.th-cur.th)*.06;
+    cam.position.set(cur.t.x+cur.d*Math.sin(cur.ph)*Math.sin(cur.th),cur.t.y+cur.d*Math.cos(cur.ph),cur.t.z+cur.d*Math.sin(cur.ph)*Math.cos(cur.th));cam.lookAt(cur.t);
+    trucks.forEach(k=>{const p=((t*.06+k.o)%1)*44-22;k.g.position.set(.5*(k.o?-1:1),0,k.o?-p:p);k.g.rotation.y=k.o?Math.PI:0});
+    renderer.render(scene,cam);})();
+})();
+})();
+</script>
+</body>
+</html>
